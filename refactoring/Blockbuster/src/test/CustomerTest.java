@@ -21,7 +21,7 @@ public class CustomerTest {
         String statement = customer.statement();
 
         // Assert
-        String expectedStatement = "Rental Record for John Doe\n" +
+        String expectedStatement = "main.Rental Record for John Doe\n" +
                 "\tHarry Potter\t1.5\n" +
                 "\tLord of the Rings\t6.5\n" +
                 "\tStar Wars\t3.0\n" +
