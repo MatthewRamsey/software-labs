@@ -3,16 +3,21 @@ package test;
 import main.Customer;
 import main.Movie;
 import main.Rental;
+import org.junit.Before;
 import org.junit.Test;
-
-import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.Assert.*;
 
 public class CustomerTest {
+    private Customer customer;
+
+    @Before
+    public void setUp(){
+        customer = new Customer("John Doe");
+    }
 
     @Test
     public void testStatement() {
         // Arrange
-        Customer customer = new Customer("John Doe");
         customer.addRental(new Rental(new Movie("Harry Potter", Movie.CHILDRENS), 3));
         customer.addRental(new Rental(new Movie("Lord of the Rings", Movie.REGULAR), 5));
         customer.addRental(new Rental(new Movie("Star Wars", Movie.NEW_RELEASE), 1));
@@ -28,5 +33,25 @@ public class CustomerTest {
                 "Amount owed is 11.0\n" +
                 "You earned 3 frequent renter points";
         assertEquals(expectedStatement, statement);
+    }
+
+    @Test
+    public void testGetName() {
+        // Assert
+        assertEquals("John Doe", customer.getName());
+    }
+
+    @Test
+    public void testAddRental() {
+        // Arrange
+        Movie movie = new Movie("Harry Potter", Movie.CHILDRENS);
+        Rental rental = new Rental(movie, 3);
+        customer.addRental(rental);
+
+        // Act
+        String statement = customer.statement();
+
+        // Assert
+        assertTrue(statement.contains("Harry Potter\t1.5"));
     }
 }

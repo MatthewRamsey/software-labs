@@ -4,7 +4,6 @@ import java.util.Enumeration;
 import java.util.Vector;
 
 public class Customer {
-
         private String _name;
         private Vector _rentals = new Vector();
 
@@ -26,19 +25,18 @@ public class Customer {
             Enumeration rentals = _rentals.elements();
             String result = "main.Rental Record for " + getName() + "\n";
             while(rentals.hasMoreElements()){
-                double thisAmount = 0;
                 Rental each = (Rental) rentals.nextElement();
 
                 frequentRenterPoints += each.getFrequentRenterPoints();
 
                 //show figures for this rental
-                result += "\t" + each.getMovie().getTitle() + "\t" + String.valueOf(each.getCharge()) + "\n";
+                result += "\t" + each.getMovie().getTitle() + "\t" + each.getCharge() + "\n";
                 totalAmount += each.getCharge();
             }
 
             //add footer lines
-            result += "Amount owed is " + String.valueOf(totalAmount) + "\n";
-            result += "You earned " + String.valueOf(frequentRenterPoints) + " frequent renter points";
+            result += "Amount owed is " + totalAmount + "\n";
+            result += "You earned " + frequentRenterPoints + " frequent renter points";
             return result;
         }
 }
