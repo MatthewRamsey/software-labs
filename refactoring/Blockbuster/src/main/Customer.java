@@ -35,8 +35,28 @@ public class Customer {
             }
 
             //add footer lines
-            result += "Amount owed is " + totalAmount + "\n";
-            result += "You earned " + frequentRenterPoints + " frequent renter points";
+            result += "Amount owed is " + getTotalCharge() + "\n";
+            result += "You earned " + getTotalFrequentRenterPoints() + " frequent renter points";
+            return result;
+        }
+
+        private double getTotalCharge() {
+            double result = 0;
+            Enumeration rentals = _rentals.elements();
+            while(rentals.hasMoreElements()){
+                Rental each = (Rental) rentals.nextElement();
+                result += each.getCharge();
+            }
+            return result;
+        }
+
+        private int getTotalFrequentRenterPoints() {
+            int result = 0;
+            Enumeration rentals = _rentals.elements();
+            while(rentals.hasMoreElements()){
+                Rental each = (Rental) rentals.nextElement();
+                result += each.getFrequentRenterPoints();
+            }
             return result;
         }
 }
